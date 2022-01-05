@@ -45,10 +45,12 @@ spec:
    selector: 
      app: web 
    ports: 
-   - protocol: TCP 
-     port: 9001 
-     targetPort: 9001 
-   - protocol: TCP 
-     port: 9005 
-     targetPort: 9005
+	- name: userserviceport
+	  protocol: TCP
+	  port: 9001
+	  targetPort: 9001
+	- name: reportingserviceport
+	  protocol: TCP
+	  port: 9005
+	  targetPort: 9005
    type: LoadBalancer
