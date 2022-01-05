@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userreportingapp
+  labels:
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: userservice
+          image: pdecontainerregistry.azurecr.io/userservice:84
+          ports:
+            - containerPort: 9001 
+		    - name: storageblobservice
+          image: pdecontainerregistry.azurecr.io/storageblobservice:85
+          ports:
+            - containerPort: 9006
+        - name: reportingservice
+          image: pdecontainerregistry.azurecr.io/reportingservice:81
+          ports:
+            - containerPort: 9005
+		    - name: servicebusservice
+          image: pdecontainerregistry.azurecr.io/servicebusservice:73
+          ports:
+            - containerPort: 9003
+	     	- name: cosmosdbservice
+          image: pdecontainerregistry.azurecr.io/cosmosdbservice:71
+          ports:
+            - containerPort: 9004
+---
+ kind: Service
+ apiVersion: v1 
+ metadata:
+   name: userreportingapp-svc
+ spec: 
+   selector: 
+     app: web 
+   ports: 
+   - protocol: TCP 
+     port: 9001 
+     targetPort: 9001 
+   - protocol: TCP 
+     port: 9005 
+     targetPort: 9005
+   type: LoadBalancer
