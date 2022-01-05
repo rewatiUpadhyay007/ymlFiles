@@ -20,7 +20,7 @@ spec:
           image: pdecontainerregistry.azurecr.io/userservice:_UserService_
           ports:
             - containerPort: 9001 
-		    - name: storageblobservice
+	- name: storageblobservice
           image: pdecontainerregistry.azurecr.io/storageblobservice:_BlobService_
           ports:
             - containerPort: 9006
@@ -28,11 +28,11 @@ spec:
           image: pdecontainerregistry.azurecr.io/reportingservice:_ReportingService_
           ports:
             - containerPort: 9005
-		    - name: servicebusservice
+	- name: servicebusservice
           image: pdecontainerregistry.azurecr.io/servicebusservice:_ServiceBusService_
           ports:
             - containerPort: 9003
-	     	- name: cosmosdbservice
+	- name: cosmosdbservice
           image: pdecontainerregistry.azurecr.io/cosmosdbservice:_CosmosDBService_
           ports:
             - containerPort: 9004
